@@ -1,0 +1,182 @@
+digraph "Ansible Digger" {
+  rankdir=TB;
+  compound=true;
+  fontname="Helvetica";
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  graph [label="Ansible Digger", labelloc=t, fontsize=20];
+
+  subgraph cluster_play_0 {
+    id = "cluster_play_0";
+    class = "play";
+    URL = "#play-0";
+    label = "🎭 Play: Deploy Web Platform\nHosts: webservers";
+    style = filled;
+    fillcolor = "#E8DAEF";
+
+    subgraph cluster_play_0_pre_tasks {
+      label = "🔧 Pre-Tasks";
+      pre_task_0_0 [
+        id = "pre_task_0_0",
+        label = "⚙ Ensure required packages are installed\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Ensure required packages are installed",
+        URL = "#pre_task_0_0"
+      ];
+      pre_task_0_1 [
+        id = "pre_task_0_1",
+        label = "⚙ Abort if package installation failed\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Abort if package installation failed",
+        URL = "#pre_task_0_1"
+      ];
+    }
+    subgraph cluster_play_0_roles {
+      label = "📦 Roles";
+      subgraph cluster_play_0_role_0 {
+        id = "cluster_play_0_role_0";
+        class = "role";
+        label = "📦 Role: common";
+        style = filled;
+        fillcolor = "#D6EAF8";
+        role_placeholder_0_0 [label="(details)", shape=plaintext];
+      }
+      subgraph cluster_play_0_role_1 {
+        id = "cluster_play_0_role_1";
+        class = "role";
+        label = "📦 Role: nginx";
+        style = filled;
+        fillcolor = "#D6EAF8";
+        subgraph cluster_play_0_role_1_tasks {
+          label = "";
+      role_1_task_install_yml [
+        id = "role_1_task_install_yml",
+        label = "🔗 install.yml",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for ",
+        URL = "#role_1_task_install_yml"
+      ];
+      role_1_task_configure_yml [
+        id = "role_1_task_configure_yml",
+        label = "🔗 configure.yml",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for ",
+        URL = "#role_1_task_configure_yml"
+      ];
+      role_1_task_logging_yml [
+        id = "role_1_task_logging_yml",
+        label = "🔗 logging.yml",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for ",
+        URL = "#role_1_task_logging_yml"
+      ];
+        }
+      }
+    }
+    subgraph cluster_play_0_tasks {
+      label = "⚙ Tasks";
+      task_0_2 [
+        id = "task_0_2",
+        label = "⚙ Create application directory\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Create application directory",
+        URL = "#task_0_2"
+      ];
+      task_0_3 [
+        id = "task_0_3",
+        label = "⚙ Clone application repository\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Clone application repository",
+        URL = "#task_0_3"
+      ];
+      task_0_4 [
+        id = "task_0_4",
+        label = "⚙ Install Python dependencies\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Install Python dependencies",
+        URL = "#task_0_4"
+      ];
+      task_0_10 [
+        id = "task_0_10",
+        label = "⚙ Template nginx config\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Template nginx config",
+        URL = "#task_0_10"
+      ];
+      task_0_11 [
+        id = "task_0_11",
+        label = "⚙ Start application service asynchronously\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Start application service asynchronously",
+        URL = "#task_0_11"
+      ];
+      task_0_12 [
+        id = "task_0_12",
+        label = "⚙ Wait for app to listen\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Wait for app to listen",
+        URL = "#task_0_12"
+      ];
+    }
+    // Handler Nodes
+      handler_0_13 [
+        id = "handler_0_13",
+        label = "🚨 Restart nginx\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Restart nginx",
+        URL = "#handler_0_13"
+      ];
+      handler_0_14 [
+        id = "handler_0_14",
+        label = "🚨 Reload nginx\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Reload nginx",
+        URL = "#handler_0_14"
+      ];
+
+    
+// Sequential Edges
+    pre_task_0_0 -> pre_task_0_1 [];
+    pre_task_0_1 -> role_placeholder_0_0 [];
+    role_placeholder_0_0 -> role_1_task_install_yml [];
+    role_1_task_install_yml -> role_1_task_configure_yml [];
+    role_1_task_configure_yml -> role_1_task_logging_yml [];
+    role_1_task_logging_yml -> task_0_2 [];
+    task_0_2 -> task_0_3 [];
+    task_0_3 -> task_0_4 [];
+    task_0_4 -> task_0_10 [];
+    task_0_10 -> task_0_11 [];
+    task_0_11 -> task_0_12 [];
+    
+// Notification Edges
+  task_0_3 -> handler_0_13 [style=dotted, color=purple, label="🚨 notify", weight=0];
+  task_0_10 -> handler_0_14 [style=dotted, color=purple, label="🚨 notify", weight=0];
+  }
+
+}

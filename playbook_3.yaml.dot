@@ -1,0 +1,222 @@
+digraph "Ansible Digger" {
+  rankdir=TB;
+  compound=true;
+  fontname="Helvetica";
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  graph [label="Ansible Digger", labelloc=t, fontsize=20];
+
+  subgraph cluster_play_0 {
+    id = "cluster_play_0";
+    class = "play";
+    URL = "#play-0";
+    label = "🎭 Play: Provision CI Workers\nHosts: workers";
+    style = filled;
+    fillcolor = "#E8DAEF";
+
+    subgraph cluster_play_0_pre_tasks {
+      label = "🔧 Pre-Tasks";
+      pre_task_0_0 [
+        id = "pre_task_0_0",
+        label = "⚙ Update apt cache\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Update apt cache",
+        URL = "#pre_task_0_0"
+      ];
+    }
+    subgraph cluster_play_0_roles {
+      label = "📦 Roles";
+      subgraph cluster_play_0_role_0 {
+        id = "cluster_play_0_role_0";
+        class = "role";
+        label = "📦 Role: docker";
+        style = filled;
+        fillcolor = "#D6EAF8";
+        subgraph cluster_play_0_role_0_tasks {
+          label = "";
+      role_0_task_centos_yml [
+        id = "role_0_task_centos_yml",
+        label = "🔗 centos.yml",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for include tasks for CentOS like distributions",
+        URL = "#role_0_task_centos_yml"
+      ];
+      role_0_task_debian_yml [
+        id = "role_0_task_debian_yml",
+        label = "🔗 debian.yml",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for include tasks for Debian like distributions",
+        URL = "#role_0_task_debian_yml"
+      ];
+      role_0_task_add_users_to_the_docker_group [
+        id = "role_0_task_add_users_to_the_docker_group",
+        label = "⚙ add users to the docker group\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for add users to the docker group",
+        URL = "#role_0_task_add_users_to_the_docker_group"
+      ];
+      role_0_task_create_/etc/docker [
+        id = "role_0_task_create_/etc/docker",
+        label = "⚙ create /etc/docker\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for create /etc/docker",
+        URL = "#role_0_task_create_/etc/docker"
+      ];
+      role_0_task_configure_docker_daemon [
+        id = "role_0_task_configure_docker_daemon",
+        label = "⚙ configure docker daemon\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for configure docker daemon",
+        URL = "#role_0_task_configure_docker_daemon"
+      ];
+      role_0_task_enable_docker_daemon [
+        id = "role_0_task_enable_docker_daemon",
+        label = "⚙ enable docker daemon\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for enable docker daemon",
+        URL = "#role_0_task_enable_docker_daemon"
+      ];
+      role_0_task_start_docker_daemon [
+        id = "role_0_task_start_docker_daemon",
+        label = "⚙ start docker daemon\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for start docker daemon",
+        URL = "#role_0_task_start_docker_daemon"
+      ];
+        }
+      }
+      subgraph cluster_play_0_role_1 {
+        id = "cluster_play_0_role_1";
+        class = "role";
+        label = "📦 Role: ci-agent";
+        style = filled;
+        fillcolor = "#D6EAF8";
+        role_placeholder_0_1 [label="(details)", shape=plaintext];
+      }
+    }
+    subgraph cluster_play_0_tasks {
+      label = "⚙ Tasks";
+      task_0_1 [
+        id = "task_0_1",
+        label = "⚙ Install required packages\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Install required packages",
+        URL = "#task_0_1"
+      ];
+      task_0_2 [
+        id = "task_0_2",
+        label = "⚙ Ensure docker group exists\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Ensure docker group exists",
+        URL = "#task_0_2"
+      ];
+      task_0_3 [
+        id = "task_0_3",
+        label = "⚙ Add users to docker group\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Add users to docker group",
+        URL = "#task_0_3"
+      ];
+      task_0_4 [
+        id = "task_0_4",
+        label = "⚙ Debug user modification results\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Debug user modification results",
+        URL = "#task_0_4"
+      ];
+      task_0_5 [
+        id = "task_0_5",
+        label = "⚙ Pull CI agent image\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Pull CI agent image",
+        URL = "#task_0_5"
+      ];
+      task_0_6 [
+        id = "task_0_6",
+        label = "⚙ Start CI container\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Start CI container",
+        URL = "#task_0_6"
+      ];
+      task_0_7 [
+        id = "task_0_7",
+        label = "⚙ Configure system limits\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Configure system limits",
+        URL = "#task_0_7"
+      ];
+      task_0_8 [
+        id = "task_0_8",
+        label = "⚙ Reboot if kernel updated\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Reboot if kernel updated",
+        URL = "#task_0_8"
+      ];
+    }
+    // Handler Nodes
+      handler_0_9 [
+        id = "handler_0_9",
+        label = "🚨 Restart docker\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Restart docker",
+        URL = "#handler_0_9"
+      ];
+
+    
+// Sequential Edges
+    pre_task_0_0 -> role_0_task_centos_yml [];
+    role_0_task_centos_yml -> role_0_task_debian_yml [];
+    role_0_task_debian_yml -> role_0_task_add_users_to_the_docker_group [];
+    role_0_task_add_users_to_the_docker_group -> role_0_task_create_/etc/docker [];
+    role_0_task_create_/etc/docker -> role_0_task_configure_docker_daemon [];
+    role_0_task_configure_docker_daemon -> role_0_task_enable_docker_daemon [];
+    role_0_task_enable_docker_daemon -> role_0_task_start_docker_daemon [];
+    role_0_task_start_docker_daemon -> role_placeholder_0_1 [];
+    role_placeholder_0_1 -> task_0_1 [];
+    task_0_1 -> task_0_2 [];
+    task_0_2 -> task_0_3 [];
+    task_0_3 -> task_0_4 [];
+    task_0_4 -> task_0_5 [];
+    task_0_5 -> task_0_6 [];
+    task_0_6 -> task_0_7 [];
+    task_0_7 -> task_0_8 [];
+    
+// Notification Edges
+  task_0_6 -> handler_0_9 [style=dotted, color=purple, label="🚨 notify", weight=0];
+  }
+
+}

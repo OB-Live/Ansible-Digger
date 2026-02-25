@@ -1,0 +1,83 @@
+---
+- name: Setup PostgreSQL Cluster
+  hosts: dbservers
+  gather_facts: true
+  serial: 1
+  max_fail_percentage: 20
+  vars:
+    postgres_version: 14
+    replication_user: replicator
+
+  pre_tasks:
+    - name: Ensure OS is Debian
+      fail:
+        msg: "Unsupported OS"
+      when: ansible_facts['os_family'] != "Debian"
+
+  roles:
+    - role: geerlingguy.postgresql
+    - role: monitoring
+
+  tasks:
+
+    - name: Install PostgreSQL
+      apt:
+        name: "postgresql-{{ postgres_version }}"
+        state: present
+      become: true
+      register: pg_install
+
+    - name: Initialize database
+      command: pg_createcluster {{ postgres_version }} main --start
+      when: pg_install.changed
+      register: init_result
+      failed_when: "'already exists' not in init_result.stderr"
+
+    - name: Configure replication user
+      postgresql_user:
+        name: "{{ replication_user }}"
+        role_attr_flags: REPLICATION
+      become: true
+      register: repl_user
+
+    - name: Configure pg_hba
+      template:
+        src: pg_hba.conf.j2
+        dest: /etc/postgresql/{{ postgres_version }}/main/pg_hba.conf
+      notify:
+        - Restart postgres
+
+    - name: Gather primary host
+      set_fact:
+        primary_host: "{{ groups['dbservers'][0] }}"
+
+    - name: Configure standby
+      block:
+        - name: Stop postgres
+          service:
+            name: postgresql
+            state: stopped
+
+        - name: Clone primary data
+          shell: >
+            pg_basebackup -h {{ primary_host }}
+            -D /var/lib/postgresql/{{ postgres_version }}/main
+            -U {{ replication_user }}
+          delegate_to: "{{ inventory_hostname }}"
+          register: clone_result
+
+      rescue:
+        - name: Fail replication setup
+          fail:
+            msg: "Replication failed"
+
+    - name: Start postgres
+      service:
+        name: postgresql
+        state: started
+
+  handlers:
+    - name: Restart postgres
+      service:
+        name: postgresql
+        state: restarted

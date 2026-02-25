@@ -1,0 +1,19 @@
+digraph "Ansible Digger" {
+    rankdir=TB;
+    compound=true;
+    fontname="Helvetica";
+    node [fontname="Helvetica"];
+    edge [fontname="Helvetica"];
+    graph [label="Ansible Digger", labelloc=t, fontsize=20];
+
+    subgraph cluster_play_0 {
+        id = "cluster_play_0";
+        class = "play";
+        URL = "#play-0";
+        label = "🎭 Play: \nHosts: ";
+        style = filled;
+        fillcolor = "#E8DAEF";
+
+    }
+
+}

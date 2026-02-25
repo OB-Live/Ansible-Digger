@@ -1,0 +1,242 @@
+digraph "Ansible Digger" {
+  rankdir=TB;
+  compound=true;
+  fontname="Helvetica";
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  graph [label="Ansible Digger", labelloc=t, fontsize=20];
+
+  subgraph cluster_play_0 {
+    id = "cluster_play_0";
+    class = "play";
+    URL = "#play-0";
+    label = "🎭 Play: Setup PostgreSQL Cluster\nHosts: dbservers";
+    style = filled;
+    fillcolor = "#E8DAEF";
+
+    subgraph cluster_play_0_pre_tasks {
+      label = "🔧 Pre-Tasks";
+      pre_task_0_0 [
+        id = "pre_task_0_0",
+        label = "⚙ Ensure OS is Debian\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Ensure OS is Debian",
+        URL = "#pre_task_0_0"
+      ];
+    }
+    subgraph cluster_play_0_roles {
+      label = "📦 Roles";
+      subgraph cluster_play_0_role_0 {
+        id = "cluster_play_0_role_0";
+        class = "role";
+        label = "📦 geerlingguy.postgresql";
+        style = filled;
+        fillcolor = "#D6EAF8";
+        subgraph cluster_play_0_role_0_tasks {
+          label = "";
+          role_0_task_variables_yml [
+            id = "role_0_task_variables_yml",
+            label = "🔗 variables.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_variables_yml"
+          ];
+          role_0_task_setup_Archlinux_yml [
+            id = "role_0_task_setup_Archlinux_yml",
+            label = "🔗 setup-Archlinux.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_setup_Archlinux_yml"
+          ];
+          role_0_task_setup_Debian_yml [
+            id = "role_0_task_setup_Debian_yml",
+            label = "🔗 setup-Debian.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_setup_Debian_yml"
+          ];
+          role_0_task_setup_RedHat_yml [
+            id = "role_0_task_setup_RedHat_yml",
+            label = "🔗 setup-RedHat.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_setup_RedHat_yml"
+          ];
+          role_0_task_initialize_yml [
+            id = "role_0_task_initialize_yml",
+            label = "🔗 initialize.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_initialize_yml"
+          ];
+          role_0_task_configure_yml [
+            id = "role_0_task_configure_yml",
+            label = "🔗 configure.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_configure_yml"
+          ];
+          role_0_task_Ensure_PostgreSQL_is_started_and_enabled_on_boot_ [
+            id = "role_0_task_Ensure_PostgreSQL_is_started_and_enabled_on_boot_",
+            label = "⚙ Ensure PostgreSQL is started and enabled on boot.\n",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for Ensure PostgreSQL is started and enabled on boot.",
+            URL = "#role_0_task_Ensure_PostgreSQL_is_started_and_enabled_on_boot_"
+          ];
+          role_0_task_users_yml [
+            id = "role_0_task_users_yml",
+            label = "🔗 users.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_users_yml"
+          ];
+          role_0_task_databases_yml [
+            id = "role_0_task_databases_yml",
+            label = "🔗 databases.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_databases_yml"
+          ];
+          role_0_task_users_props_yml [
+            id = "role_0_task_users_props_yml",
+            label = "🔗 users_props.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_0_task_users_props_yml"
+          ];
+        }
+      }
+      subgraph cluster_play_0_role_1 {
+        id = "cluster_play_0_role_1";
+        class = "role";
+        label = "📦 monitoring";
+        style = filled;
+        fillcolor = "#D6EAF8";
+        role_placeholder_0_1 [label="(details)", shape=plaintext];
+      }
+    }
+    subgraph cluster_play_0_tasks {
+      label = "⚙ Tasks";
+      task_0_1 [
+        id = "task_0_1",
+        label = "⚙ Install PostgreSQL\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Install PostgreSQL",
+        URL = "#task_0_1"
+      ];
+      task_0_2 [
+        id = "task_0_2",
+        label = "⚙ Initialize database\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Initialize database",
+        URL = "#task_0_2"
+      ];
+      task_0_3 [
+        id = "task_0_3",
+        label = "⚙ Configure replication user\n 🔒",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Configure replication user",
+        URL = "#task_0_3"
+      ];
+      task_0_4 [
+        id = "task_0_4",
+        label = "⚙ Configure pg_hba\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Configure pg_hba",
+        URL = "#task_0_4"
+      ];
+      task_0_5 [
+        id = "task_0_5",
+        label = "⚙ Gather primary host\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Gather primary host",
+        URL = "#task_0_5"
+      ];
+      task_0_6 [
+        id = "task_0_6",
+        label = "⚙ Configure standby\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Configure standby",
+        URL = "#task_0_6"
+      ];
+      task_0_10 [
+        id = "task_0_10",
+        label = "⚙ Start postgres\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Start postgres",
+        URL = "#task_0_10"
+      ];
+    }
+    // Handler Nodes
+      handler_0_11 [
+        id = "handler_0_11",
+        label = "🚨 Restart postgres\n",
+        shape = "record",
+        style = "filled",
+        fillcolor = "white",
+        tooltip = "Tooltip for Restart postgres",
+        URL = "#handler_0_11"
+      ];
+
+    
+// Sequential Edges
+    pre_task_0_0 -> role_0_task_variables_yml [];
+    role_0_task_variables_yml -> role_0_task_setup_Archlinux_yml [];
+    role_0_task_setup_Archlinux_yml -> role_0_task_setup_Debian_yml [];
+    role_0_task_setup_Debian_yml -> role_0_task_setup_RedHat_yml [];
+    role_0_task_setup_RedHat_yml -> role_0_task_initialize_yml [];
+    role_0_task_initialize_yml -> role_0_task_configure_yml [];
+    role_0_task_configure_yml -> role_0_task_Ensure_PostgreSQL_is_started_and_enabled_on_boot_ [];
+    role_0_task_Ensure_PostgreSQL_is_started_and_enabled_on_boot_ -> role_0_task_users_yml [];
+    role_0_task_users_yml -> role_0_task_databases_yml [];
+    role_0_task_databases_yml -> role_0_task_users_props_yml [];
+    role_0_task_users_props_yml -> role_placeholder_0_1 [];
+    role_placeholder_0_1 -> task_0_1 [];
+    task_0_1 -> task_0_2 [];
+    task_0_2 -> task_0_3 [];
+    task_0_3 -> task_0_4 [];
+    task_0_4 -> task_0_5 [];
+    task_0_5 -> task_0_6 [];
+    task_0_6 -> task_0_10 [];
+    
+// Notification Edges
+  task_0_4 -> handler_0_11 [style=dotted, color=purple, label="🚨 notify", weight=0];
+  }
+
+}

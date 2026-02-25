@@ -1,0 +1,117 @@
+---
+- name: Deploy Web Platform
+  hosts: webservers
+  strategy: free
+  serial: 2
+  gather_facts: true
+  vars:
+    app_user: webapp
+    app_root: /var/www/app
+    nginx_port: 8080
+  vars_files:
+    - secrets.yml
+
+  pre_tasks:
+    - name: Ensure required packages are installed
+      apt:
+        name:
+          - nginx
+          - git
+          - python3
+        state: present
+      become: true
+      register: pkg_result
+      tags: [packages]
+
+    - name: Abort if package installation failed
+      fail:
+        msg: "Package installation failed"
+      when: pkg_result.failed
+
+  roles:
+    - role: common
+      tags: [base]
+    - role: nginx
+      vars:
+        nginx_worker_processes: auto
+
+  tasks:
+
+    - name: Create application directory
+      file:
+        path: "{{ app_root }}"
+        state: directory
+        owner: "{{ app_user }}"
+        mode: '0755'
+      become: true
+      register: app_dir
+
+    - name: Clone application repository
+      git:
+        repo: "https://github.com/example/app.git"
+        dest: "{{ app_root }}"
+        version: main
+      register: git_clone
+      notify:
+        - Restart nginx
+
+    - name: Install Python dependencies
+      block:
+        - name: Install requirements
+          shell: pip3 install -r requirements.txt
+          args:
+            chdir: "{{ app_root }}"
+          register: pip_result
+          changed_when: "'Successfully installed' in pip_result.stdout"
+
+        - name: Verify installation
+          command: pip3 list
+          register: pip_list
+
+      rescue:
+        - name: Log installation failure
+          debug:
+            msg: "Dependency installation failed"
+        - name: Rollback repository
+          file:
+            path: "{{ app_root }}"
+            state: absent
+
+      always:
+        - name: Clean temporary files
+          file:
+            path: /tmp/pip_cache
+            state: absent
+
+    - name: Template nginx config
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-enabled/app.conf
+      become: true
+      notify:
+        - Reload nginx
+
+    - name: Start application service asynchronously
+      shell: python3 app.py
+      args:
+        chdir: "{{ app_root }}"
+      async: 60
+      poll: 0
+      register: app_async
+
+    - name: Wait for app to listen
+      wait_for:
+        port: "{{ nginx_port }}"
+        timeout: 30
+      when: app_async is defined
+
+  handlers:
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Reload nginx
+      service:
+        name: nginx
+        state: reloaded

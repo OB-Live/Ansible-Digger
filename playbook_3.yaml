@@ -1,0 +1,81 @@
+---
+- name: Provision CI Workers
+  hosts: workers
+  strategy: free
+  gather_facts: true
+  vars:
+    docker_users:
+      - ci
+      - builder
+    packages:
+      - docker.io
+      - git
+      - curl
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      become: true
+
+  roles:
+    - docker
+    - ci-agent
+
+  tasks:
+
+    - name: Install required packages
+      apt:
+        name: "{{ packages }}"
+        state: present
+      become: true
+      register: pkg_install
+
+    - name: Ensure docker group exists
+      group:
+        name: docker
+        state: present
+
+    - name: Add users to docker group
+      user:
+        name: "{{ item }}"
+        groups: docker
+        append: yes
+      loop: "{{ docker_users }}"
+      register: user_mod
+
+    - name: Debug user modification results
+      debug:
+        var: user_mod
+
+    - name: Pull CI agent image
+      shell: docker pull example/ci-agent:latest
+      register: docker_pull
+      changed_when: "'Downloaded newer image' in docker_pull.stdout"
+
+    - name: Start CI container
+      docker_container:
+        name: ci-agent
+        image: example/ci-agent:latest
+        state: started
+        restart_policy: always
+      notify:
+        - Restart docker
+
+    - name: Configure system limits
+      copy:
+        src: limits.conf
+        dest: /etc/security/limits.conf
+      become: true
+      register: limits_copy
+
+    - name: Reboot if kernel updated
+      reboot:
+        msg: "Reboot initiated by Ansible"
+      when: "'linux-image' in pkg_install.stdout"
+
+  handlers:
+    - name: Restart docker
+      service:
+        name: docker
+        state: restarted
