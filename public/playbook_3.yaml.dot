@@ -31,80 +31,80 @@ digraph "Ansible Digger" {
       subgraph cluster_play_0_role_0 {
         id = "cluster_play_0_role_0";
         class = "role";
-        label = "📦 Role: docker";
+        label = "📦 docker";
         style = filled;
         fillcolor = "#D6EAF8";
         subgraph cluster_play_0_role_0_tasks {
           label = "";
-      role_0_task_centos_yml [
-        id = "role_0_task_centos_yml",
-        label = "🔗 centos.yml",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for include tasks for CentOS like distributions",
-        URL = "#role_0_task_centos_yml"
-      ];
-      role_0_task_debian_yml [
-        id = "role_0_task_debian_yml",
-        label = "🔗 debian.yml",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for include tasks for Debian like distributions",
-        URL = "#role_0_task_debian_yml"
-      ];
-      role_0_task_add_users_to_the_docker_group [
-        id = "role_0_task_add_users_to_the_docker_group",
-        label = "⚙ add users to the docker group\n",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for add users to the docker group",
-        URL = "#role_0_task_add_users_to_the_docker_group"
-      ];
-      role_0_task_create_/etc/docker [
-        id = "role_0_task_create_/etc/docker",
-        label = "⚙ create /etc/docker\n",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for create /etc/docker",
-        URL = "#role_0_task_create_/etc/docker"
-      ];
-      role_0_task_configure_docker_daemon [
-        id = "role_0_task_configure_docker_daemon",
-        label = "⚙ configure docker daemon\n",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for configure docker daemon",
-        URL = "#role_0_task_configure_docker_daemon"
-      ];
-      role_0_task_enable_docker_daemon [
-        id = "role_0_task_enable_docker_daemon",
-        label = "⚙ enable docker daemon\n",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for enable docker daemon",
-        URL = "#role_0_task_enable_docker_daemon"
-      ];
-      role_0_task_start_docker_daemon [
-        id = "role_0_task_start_docker_daemon",
-        label = "⚙ start docker daemon\n",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for start docker daemon",
-        URL = "#role_0_task_start_docker_daemon"
-      ];
+          role_0_task_centos_yml [
+            id = "role_0_task_centos_yml",
+            label = "🔗 centos.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for include tasks for CentOS like distributions",
+            URL = "#role_0_task_centos_yml"
+          ];
+          role_0_task_debian_yml [
+            id = "role_0_task_debian_yml",
+            label = "🔗 debian.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for include tasks for Debian like distributions",
+            URL = "#role_0_task_debian_yml"
+          ];
+          role_0_task_add_users_to_the_docker_group [
+            id = "role_0_task_add_users_to_the_docker_group",
+            label = "⚙ add users to the docker group\n",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for add users to the docker group",
+            URL = "#role_0_task_add_users_to_the_docker_group"
+          ];
+          role_0_task_create_/etc/docker [
+            id = "role_0_task_create_/etc/docker",
+            label = "⚙ create /etc/docker\n",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for create /etc/docker",
+            URL = "#role_0_task_create_/etc/docker"
+          ];
+          role_0_task_configure_docker_daemon [
+            id = "role_0_task_configure_docker_daemon",
+            label = "⚙ configure docker daemon\n",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for configure docker daemon",
+            URL = "#role_0_task_configure_docker_daemon"
+          ];
+          role_0_task_enable_docker_daemon [
+            id = "role_0_task_enable_docker_daemon",
+            label = "⚙ enable docker daemon\n",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for enable docker daemon",
+            URL = "#role_0_task_enable_docker_daemon"
+          ];
+          role_0_task_start_docker_daemon [
+            id = "role_0_task_start_docker_daemon",
+            label = "⚙ start docker daemon\n",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for start docker daemon",
+            URL = "#role_0_task_start_docker_daemon"
+          ];
         }
       }
       subgraph cluster_play_0_role_1 {
         id = "cluster_play_0_role_1";
         class = "role";
-        label = "📦 Role: ci-agent";
+        label = "📦 ci-agent";
         style = filled;
         fillcolor = "#D6EAF8";
         role_placeholder_0_1 [label="(details)", shape=plaintext];

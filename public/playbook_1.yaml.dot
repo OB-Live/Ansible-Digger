@@ -40,7 +40,7 @@ digraph "Ansible Digger" {
       subgraph cluster_play_0_role_0 {
         id = "cluster_play_0_role_0";
         class = "role";
-        label = "📦 Role: common";
+        label = "📦 common";
         style = filled;
         fillcolor = "#D6EAF8";
         role_placeholder_0_0 [label="(details)", shape=plaintext];
@@ -48,38 +48,38 @@ digraph "Ansible Digger" {
       subgraph cluster_play_0_role_1 {
         id = "cluster_play_0_role_1";
         class = "role";
-        label = "📦 Role: nginx";
+        label = "📦 nginx";
         style = filled;
         fillcolor = "#D6EAF8";
         subgraph cluster_play_0_role_1_tasks {
           label = "";
-      role_1_task_install_yml [
-        id = "role_1_task_install_yml",
-        label = "🔗 install.yml",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for ",
-        URL = "#role_1_task_install_yml"
-      ];
-      role_1_task_configure_yml [
-        id = "role_1_task_configure_yml",
-        label = "🔗 configure.yml",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for ",
-        URL = "#role_1_task_configure_yml"
-      ];
-      role_1_task_logging_yml [
-        id = "role_1_task_logging_yml",
-        label = "🔗 logging.yml",
-        shape = "record",
-        style = "filled",
-        fillcolor = "white",
-        tooltip = "Tooltip for ",
-        URL = "#role_1_task_logging_yml"
-      ];
+          role_1_task_install_yml [
+            id = "role_1_task_install_yml",
+            label = "🔗 install.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_1_task_install_yml"
+          ];
+          role_1_task_configure_yml [
+            id = "role_1_task_configure_yml",
+            label = "🔗 configure.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_1_task_configure_yml"
+          ];
+          role_1_task_logging_yml [
+            id = "role_1_task_logging_yml",
+            label = "🔗 logging.yml",
+            shape = "record",
+            style = "filled",
+            fillcolor = "white",
+            tooltip = "Tooltip for ",
+            URL = "#role_1_task_logging_yml"
+          ];
         }
       }
     }
