@@ -18,7 +18,7 @@ jobs:
           go-version: '1.21'
 
       - name: Build adigger
-        run: go build -o adigger ./adigger
+        run: go build -o dist/adigger ./
 
       - name: Create example playbook if none exist
         run: |
@@ -32,7 +32,7 @@ jobs:
           fi
 
       - name: Run adigger to generate DOT files
-        run: ./adigger
+        run: ./dist/adigger
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -40,8 +40,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This should include all files needed for the GitHub Pages site
-          path: '.'
+          # Upload the public directory
+          path: './public'
 
       - name: Deploy to GitHub Pages
         id: deployment
