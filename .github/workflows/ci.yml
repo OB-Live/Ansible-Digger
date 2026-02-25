@@ -1,0 +1,48 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Build adigger
+        run: go build -o adigger ./adigger
+
+      - name: Create example playbook if none exist
+        run: |
+          if ! ls playbook_*.yaml 1> /dev/null 2>&1; then
+            echo "---" > playbook_default.yaml
+            echo "- hosts: localhost" >> playbook_default.yaml
+            echo "  tasks:" >> playbook_default.yaml
+            echo "  - name: Default task" >> playbook_default.yaml
+            echo "    debug:" >> playbook_default.yaml
+            echo "      msg: 'Hello from default playbook!'" >> playbook_default.yaml
+          fi
+
+      - name: Run adigger to generate DOT files
+        run: ./adigger
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # This should include all files needed for the GitHub Pages site
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
